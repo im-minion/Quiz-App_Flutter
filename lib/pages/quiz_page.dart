@@ -4,6 +4,7 @@ import '../utils/question.dart';
 import '../UI/answer_button.dart';
 import '../UI/question_text.dart';
 import '../UI/correct_wrong_overlay.dart';
+import './score_page.dart';
 
 class QuizPage extends StatefulWidget {
   @override
@@ -32,13 +33,14 @@ class QuizPageState extends State<QuizPage> {
     questionNumber = quiz.questionNumber;
   }
 
-//  void handleAnswer(bool answer) {
-//    isCorrect = (currentQuestion.answer == answer);
-//    quiz.answer(isCorrect);
-//    this.setState(() {
-//      overlayShouldBeVisible = true;
-//    });
-//  }
+  void handleAnswer(bool answer) {
+    isCorrect = (currentQuestion.answer == answer);
+    quiz.answer(isCorrect);
+    this.setState(() {
+      overlayVisible = true;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Stack(
@@ -46,13 +48,28 @@ class QuizPageState extends State<QuizPage> {
       children: <Widget>[
         new Column( //this is main page
           children: <Widget>[
-            new AnswerButton(true, () => print("true")),
+            new AnswerButton(true, () => handleAnswer(true)),
             new QuestionText(questionText, questionNumber),
-            new AnswerButton(false, () => print("false")),
-
+            new AnswerButton(false, () => handleAnswer(false)),
           ],
         ),
-        overlayVisible == true ? new CorrectWrongOverlay(true) : new Container()
+        overlayVisible == true ? new CorrectWrongOverlay(
+            isCorrect,
+                () {
+              if (quiz.length == questionNumber) {
+                Navigator.of(context).pushAndRemoveUntil(new MaterialPageRoute(
+                    builder: (BuildContext context) => new ScorePage(
+                        quiz.score, quiz.length)),(Route route)=> route == null);
+                return;
+              }
+              currentQuestion = quiz.nextQuestion;
+              this.setState(() {
+                overlayVisible = false;
+                questionText = currentQuestion.question;
+                questionNumber = quiz.questionNumber;
+              });
+            }
+        ) : new Container()
       ],
     );
   }

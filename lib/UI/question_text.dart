@@ -31,6 +31,22 @@ class QuestionTextState extends State<QuestionText>
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    _fontSizeAnumationController.dispose();
+  }
+
+  @override
+  void didUpdateWidget(QuestionText oldWidget) {
+    // TODO: implement didUpdateWidget
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget._question != widget._question) {
+      _fontSizeAnumationController.reset();
+      _fontSizeAnumationController.forward();
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return new Material(
       color: Colors.white,
