@@ -13,7 +13,9 @@
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager" inherit-compiler-output="true">
+  <component name="NewModuleRootManager">
+    <output url="file:///production/quiz_app_android" />
+    <output-test url="file:///test/quiz_app_android" />
     <exclude-output />
     <content url="file://$MODULE_DIR$/android">
       <sourceFolder url="file://$MODULE_DIR$/android/app/src/main/java" isTestSource="false" />
