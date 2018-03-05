@@ -13,6 +13,7 @@ class QuizPage extends StatefulWidget {
 }
 
 class QuizPageState extends State<QuizPage> {
+Map data;
 
   Question currentQuestion;
   Quiz quiz = new Quiz([
