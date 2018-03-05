@@ -13,8 +13,6 @@ class QuizPage extends StatefulWidget {
 }
 
 class QuizPageState extends State<QuizPage> {
-Map data;
-
   Question currentQuestion;
   Quiz quiz = new Quiz([
     new Question("Elon Musk is human", false),
@@ -59,8 +57,10 @@ Map data;
                 () {
               if (quiz.length == questionNumber) {
                 Navigator.of(context).pushAndRemoveUntil(new MaterialPageRoute(
-                    builder: (BuildContext context) => new ScorePage(
-                        quiz.score, quiz.length)),(Route route)=> route == null);
+                    builder: (BuildContext context) =>
+                    new ScorePage(
+                        quiz.score, quiz.length)), (Route route) =>
+                route == null);
                 return;
               }
               currentQuestion = quiz.nextQuestion;
