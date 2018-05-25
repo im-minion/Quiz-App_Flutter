@@ -1,8 +1,5 @@
-# quiz_app
+# Quiz Application
 
-A new Flutter application.
+<img src="quiz_app.gif" width=320/>
 
-## Getting Started
-
-For help getting started with Flutter, view our online
-[documentation](https://flutter.io/).
+Followed Tutorials of https://www.youtube.com/channel/UCqibwXKXYPpnPuo5xg5l2xA
